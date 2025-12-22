@@ -14,4 +14,7 @@
             </div>
         </div>
     </div>
+    <h1 class="text-3xl font-bold underline">
+        Ini adalah halaman dashboard
+    </h1>
 </x-app-layout>

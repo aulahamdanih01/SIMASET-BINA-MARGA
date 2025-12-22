@@ -61,88 +61,117 @@
           </a>
         </li>
 
-        <!-- Dokumen -->
+        <!-- ASET TETAP -->
         <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-folder"></i>
             <p>
-              Dokumen
+              ASET TETAP
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('documents.index') }}" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Semua Dokumen
+              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Daftar Aset Tetap
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('documents.create') }}" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Tambah Dokumen
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Tambah Aset Tetap
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('documents.categories.index') }}" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Kategori Dokumen
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="{{ route('documents.types.index') }}" class="nav-link {{ Request::routeIs('documents.type.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Tipe Dokumen
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Riwayat Aset Tetap
               </a>
             </li>
           </ul>
         </li>
 
-        <!-- Bidang -->
-        <li class="nav-item">
-          <a href="{{ route('bidang.index') }}" class="nav-link {{ Request::routeIs('bidang.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-th-large"></i>
-            <p>Bidang</p>
-          </a>
-        </li>
-
-        <!-- Pengguna -->
-        @if(auth()->user()->role === 'administrator')
-        <li class="nav-item {{ Request::routeIs('users.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('users.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-users"></i>
+        <!-- INVENTORY-->
+        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-folder"></i>
             <p>
-              Pengguna
+              INVENTORY
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="{{ route('users.index') }}" class="nav-link {{ Request::routeIs('users.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Semua Pengguna
+              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Daftar Inventory
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('users.create') }}" class="nav-link {{ Request::routeIs('users.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Tambah Pengguna
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Tambah Inventory
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> inventory Masuk
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> inventory Keluar
               </a>
             </li>
           </ul>
         </li>
-        @endif
 
-        <!-- Statistik -->
-        @if(auth()->user()->role === 'administrator')
-        <li class="nav-item">
-          <a href="{{ route('users.access_logs') }}" class="nav-link {{ Request::routeIs('access_logs') ? 'active' : '' }}">
-            <i class="fas fa-chart-bar"></i>
-            <p>Statistik Portal</p>
+
+        <!-- LAPORAN -->
+        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-folder"></i>
+            <p>
+              LAPORAN
+              <i class="right fas fa-angle-left"></i>
+            </p>
           </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Aset Tetap
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Mutasi Aset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Kerusakan Aset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Inventory
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Inventory Masuk
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Laporan Inventory Keluar
+              </a>
+            </li>
+          </ul>
         </li>
-        @endif
       </ul>
     </nav>
 
     <!-- Logout di bawah -->
     <ul class="nav nav-pills nav-sidebar flex-column mt-auto" role="menu">
       <li class="nav-item">
-        <form method="POST" action="{{ route('logout') }}">
+        <form method="POST" action="">
           @csrf
           <button type="submit" 
               class="nav-link d-flex align-items-center" 
