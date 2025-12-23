@@ -25,10 +25,10 @@
 
 <div class="wrapper">
   {{-- Navbar --}}
-  @include('layouts.navbar')
+  @include('layouts-copas.navbar')
 
   {{-- Sidebar --}}
-  @include('layouts.sidebar')
+  @include('layouts-copas.sidebar')
 
   <!-- Content Wrapper -->
   <div class="content-wrapper">

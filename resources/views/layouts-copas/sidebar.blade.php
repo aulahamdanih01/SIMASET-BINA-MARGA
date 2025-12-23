@@ -50,23 +50,59 @@
     </div>
 
     <!-- Menu -->
+
     <nav class="mt-2 flex-grow-1">
       <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
+        <li class="nav-header" style="color: white;">MENU</li>
 
         <!-- Dashboard -->
         <li class="nav-item">
-          <a href="{{ route('dashboard') }}" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-tachometer-alt"></i>
+          <a href="" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-home"></i>
             <p>Dashboard</p>
           </a>
+        </li>
+
+
+        <!-- DATA MASTER -->
+        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-archive"></i>
+            <p>
+              Data Master
+              <i class="right fas fa-angle-left"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Penanggung Jawab Aset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Kategori Aset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Kondisi Aset
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Satuan Barang
+              </a>
+            </li>
+          </ul>
         </li>
 
         <!-- ASET TETAP -->
         <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
           <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-folder"></i>
+            <i class="nav-icon fas fa-briefcase"></i>
             <p>
-              ASET TETAP
+              Aset tetap
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
@@ -89,15 +125,17 @@
           </ul>
         </li>
 
-        <!-- INVENTORY-->
-        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-folder"></i>
+
+        <!-- INVENTORY -->
+        <li class="nav-item {{ Request::routeIs('laporan.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('laporan.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-clipboard-list"></i>
             <p>
-              INVENTORY
+              Inventory
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+
           <ul class="nav nav-treeview">
             <li class="nav-item">
               <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
@@ -105,71 +143,128 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i> Tambah Inventory
               </a>
             </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> inventory Masuk
+
+            <!-- LAPORAN INVENTORY -->
+            <li class="nav-item {{ Request::routeIs('laporan.inventory.*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::routeIs('laporan.inventory.*') ? 'active' : '' }}">
+                <i></i>
+                <p>
+                  Transaksi Inventory
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
+
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i></i>
+                    <p>Inventory Masuk</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i></i>
+                    <p>Inventory Keluar</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> inventory Keluar
-              </a>
-            </li>
+
           </ul>
         </li>
 
-
         <!-- LAPORAN -->
-        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
-            <i class="nav-icon fas fa-folder"></i>
+        <li class="nav-item {{ Request::routeIs('laporan.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('laporan.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-print"></i>
             <p>
-              LAPORAN
+              Laporan
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
+
           <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Aset Tetap
+
+            <!-- LAPORAN ASET -->
+            <li class="nav-item {{ Request::routeIs('laporan.aset.*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::routeIs('laporan.aset.*') ? 'active' : '' }}">
+                <!-- icon dihilangkan -->
+                <i></i>
+                <p>
+                  Laporan Aset Tetap
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
+
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="" class="nav-link {{ Request::routeIs('laporan.aset.mutasi') ? 'active' : '' }}">
+                    <i></i>
+                    <p>Laporan Mutasi Aset</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="" class="nav-link {{ Request::routeIs('laporan.aset.kerusakan') ? 'active' : '' }}">
+                    <i></i>
+                    <p>Laporan Kerusakan Aset</p>
+                  </a>
+                </li>
+
+                <li class="nav-item">
+                  <a href="" class="nav-link {{ Request::routeIs('laporan.aset.penghapusan') ? 'active' : '' }}">
+                    <i></i>
+                    <p>Laporan Penghapusan Aset</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Mutasi Aset
+
+            <!-- LAPORAN INVENTORY -->
+            <li class="nav-item {{ Request::routeIs('laporan.inventory.*') ? 'menu-open' : '' }}">
+              <a href="#" class="nav-link {{ Request::routeIs('laporan.inventory.*') ? 'active' : '' }}">
+                <i></i>
+                <p>
+                  Laporan Inventory
+                  <i class="right fas fa-angle-left"></i>
+                </p>
               </a>
+
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i></i>
+                    <p>Laporan Inventory Masuk</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <i></i>
+                    <p>Laporan Inventory Keluar</p>
+                  </a>
+                </li>
+              </ul>
             </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Kerusakan Aset
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Inventory
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Inventory Masuk
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Laporan Inventory Keluar
-              </a>
-            </li>
+
           </ul>
         </li>
+
       </ul>
     </nav>
 
     <!-- Logout di bawah -->
     <ul class="nav nav-pills nav-sidebar flex-column mt-auto" role="menu">
+      <li class="nav-header" style="color: white;">OTHER</li>
+      <li class="nav-item">
+        <a href="{{ route('profile.edit') }}" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
+          <i class="nav-icon fas fa-user"></i>
+          <p>Profil</p>
+        </a>
+      </li>
       <li class="nav-item">
         <form method="POST" action="">
           @csrf
