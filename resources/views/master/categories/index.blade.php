@@ -6,7 +6,7 @@
     <div class="row g-4">
         <!-- TABEL -->
         <div class="col-lg-8">
-            <div class="card border-0 shadow-sm h-100">
+            <div class="card border-0 shadow-sm">
                 <div class="card-header bg-white border-0 fw-semibold">
                     Daftar Kategori
                 </div>

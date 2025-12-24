@@ -1,36 +1,56 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AssetCategoryController;
+use App\Http\Controllers\AssetConditionController;
+use App\Http\Controllers\AssetInventoryUnitController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('template');
 });
 
 
-Route::prefix('master/')->name('master.')->group(function () {
+Route::prefix('master')->name('master.')->group(function () {
 
-    Route::prefix('kategori')->name('category.')->group(function () {
-        Route::get('/', function () {return view('master.category.index');});
-        Route::get('edit', function () {return view('master.category.edit');});
-        Route::get('detail', function () {return view('master.category.show');});
-});
+    // KATEGORI ASET
+    Route::prefix('kategori')->name('categories.')->group(function () {
+        Route::get('/', [AssetCategoryController::class, 'index'])->name('index');
+        Route::post('/', [AssetCategoryController::class, 'store'])->name('store');
+        Route::get('edit/{category}', [AssetCategoryController::class, 'edit'])->name('edit');
+        Route::put('{category}', [AssetCategoryController::class, 'update'])->name('update');
+        Route::get('detail/{category}', [AssetCategoryController::class, 'show'])->name('show');
+    });
+
+    // KONDISI ASET
     Route::prefix('kondisi')->name('condition.')->group(function () {
-        Route::get('/', function () {return view('master.condition.index');});
-        Route::get('edit', function () {return view('master.condition.edit');});
-        Route::get('detail', function () {return view('master.condition.show');});
-});
+        Route::get('/', [AssetConditionController::class, 'index'])->name('index');
+        Route::post('/', [AssetConditionController::class, 'store'])->name('store');
+        Route::get('edit/{condition}', [AssetConditionController::class, 'edit'])->name('edit');
+        Route::put('{condition}', [AssetConditionController::class, 'update'])->name('update');
+        Route::get('detail/{condition}', [AssetConditionController::class, 'show'])->name('show');
+    });
+
+    // SATUAN INVENTORY
     Route::prefix('satuan')->name('unit.')->group(function () {
-        Route::get('/', function () {return view('master.unit.index');});
-        Route::get('edit', function () {return view('master.unit.edit');});
-        Route::get('detail', function () {return view('master.unit.show');});
-});
+        Route::get('/', [AssetInventoryUnitController::class, 'index'])->name('index');
+        Route::post('/', [AssetInventoryUnitController::class, 'store'])->name('store');
+        Route::get('edit/{unit}', [AssetInventoryUnitController::class, 'edit'])->name('edit');
+        Route::put('{unit}', [AssetInventoryUnitController::class, 'update'])->name('update');
+        Route::get('detail/{unit}', [AssetInventoryUnitController::class, 'show'])->name('show');
+    });
+
+    // PIC / USER
     Route::prefix('pic')->name('pic.')->group(function () {
-        Route::get('/', function () {return view('master.pic.index');});
-        Route::get('edit', function () {return view('master.pic.edit');});
-        Route::get('detail', function () {return view('master.pic.show');});
-});
-    
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::post('/', [UserController::class, 'store'])->name('store');
+        Route::put('{user}', [UserController::class, 'update'])->name('update');
+        Route::get('detail/{user}', [UserController::class, 'show'])->name('show');
+        Route::get('{user}', [UserController::class, 'destroy'])->name('destroy');
+    });
+
 });
 
 Route::get('/dashboard', function () {

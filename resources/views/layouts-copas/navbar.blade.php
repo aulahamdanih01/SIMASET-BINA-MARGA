@@ -13,11 +13,11 @@
     @if(Auth::check())
     <li class="nav-item dropdown">
       <div class="nav-link d-flex align-items-center" data-toggle="dropdown" href="#">
-        <!-- Avatar kecil -->
+        {{-- <!-- Avatar kecil -->
         <img src="{{ asset('images/default-avatar.png') }}" 
              class="rounded-circle mr-2" 
              alt="User Avatar" 
-             width="32" height="32">
+             width="32" height="32"> --}}
         <!-- Info -->
         <div class="d-none d-md-block text-left" style="line-height: 1.2;">
           <span class="font-weight-bold">{{ Auth::user()->name }}</span><br>
