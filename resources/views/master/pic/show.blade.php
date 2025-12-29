@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container-fluid py-4">
-    <div class="row justify-content-center">
+    <div class="row g-4">
 
-        <div class="col-lg-6">
-            <div class="card card-info shadow-sm">
+        <div class="col-lg-12">
+            <div class="card card-primary shadow-sm">
 
                 <div class="card-header">
                     <h3 class="card-title mb-0">

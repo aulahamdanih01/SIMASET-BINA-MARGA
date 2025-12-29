@@ -10,6 +10,7 @@
                 <div class="card-header bg-white border-0 fw-semibold">
                     Daftar Kondisi Aset
                 </div>
+
                 <div class="card-body p-0">
                     <div class="table-responsive">
                         <table class="table table-hover align-middle mb-0">
@@ -24,97 +25,121 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                {{-- Contoh dummy --}}
-                                <tr>
-                                    <td>1</td>
-                                    <td>BK</td>
-                                    <td>Baik</td>
-                                    <td>Kondisi aset masih berfungsi normal</td>
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center align-items-center gap-2">
-                                            <span class="badge bg-success">Aktif</span>
-                                            <div class="custom-control custom-switch custom-switch-on-success">
-                                                <input type="checkbox" class="custom-control-input" id="status1" checked>
-                                                <label class="custom-control-label" for="status1"></label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-outline-warning me-1">Edit</button>
-                                        <button class="btn btn-sm btn-outline-info">Detail</button>
-                                    </td>
-                                </tr>
-
-                                <tr class="table-light">
-                                    <td>2</td>
-                                    <td>RB</td>
-                                    <td>Rusak Berat</td>
-                                    <td>Aset tidak dapat digunakan</td>
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center align-items-center gap-2">
-                                            <span class="badge bg-secondary">Nonaktif</span>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="status2">
-                                                <label class="custom-control-label" for="status2"></label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="text-center">
-                                        <button class="btn btn-sm btn-outline-warning me-1">Edit</button>
-                                        <button class="btn btn-sm btn-outline-info">Detail</button>
-                                    </td>
-                                </tr>
-                                {{-- End dummy --}}
-
+                                @forelse ($conditions as $condition)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+                                        <td class="fw-semibold">{{ $condition->code }}</td>
+                                        <td>{{ $condition->name }}</td>
+                                        <td>{{ $condition->description ?? '-' }}</td>
+                                        <td class="text-center">
+                                            <span class="badge {{ $condition->is_active ? 'bg-success' : 'bg-secondary' }}">
+                                                {{ $condition->is_active ? 'Aktif' : 'Nonaktif' }}
+                                            </span>
+                                        </td>
+                                        <td class="text-center">
+                                            <a href="{{ route('master.conditions.index', ['edit' => $condition->id]) }}"
+                                               class="btn btn-sm btn-outline-warning">
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="6" class="text-center text-muted py-4">
+                                            Belum ada data kondisi aset
+                                        </td>
+                                    </tr>
+                                @endforelse
                             </tbody>
                         </table>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <!-- FORM TAMBAH KONDISI -->
+        <!-- FORM TAMBAH / EDIT -->
         <div class="col-lg-4">
             <div class="card card-primary shadow-sm">
                 <div class="card-header">
-                    <h3 class="card-title">Tambah Kondisi Aset</h3>
+                    <h3 class="card-title">
+                        {{ $editData ? 'Edit Kondisi Aset' : 'Tambah Kondisi Aset' }}
+                    </h3>
                 </div>
 
-                <form>
+                <form method="POST"
+                      action="{{ $editData
+                                ? route('master.conditions.update', $editData->id)
+                                : route('master.conditions.store') }}">
+                    @csrf
+                    @if ($editData)
+                        @method('PUT')
+                    @endif
+
                     <div class="card-body">
 
-                        <div class="form-group mb-3">
-                            <label>Kode</label>
-                            <input type="text" class="form-control" placeholder="Contoh: BK">
+                        <div class="mb-3">
+                            <label class="form-label">Kode</label>
+                            <input type="text"
+                                   name="code"
+                                   class="form-control @error('code') is-invalid @enderror"
+                                   value="{{ old('code', $editData->code ?? '') }}"
+                                   placeholder="Contoh: BK">
+                            @error('code')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label>Nama Kondisi</label>
-                            <input type="text" class="form-control" placeholder="Contoh: Baik">
+                        <div class="mb-3">
+                            <label class="form-label">Nama Kondisi</label>
+                            <input type="text"
+                                   name="name"
+                                   class="form-control @error('name') is-invalid @enderror"
+                                   value="{{ old('name', $editData->name ?? '') }}"
+                                   placeholder="Contoh: Baik">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
-                        <div class="form-group mb-3">
-                            <label>Deskripsi</label>
-                            <textarea class="form-control" rows="3" placeholder="Deskripsi kondisi aset"></textarea>
+                        <div class="mb-3">
+                            <label class="form-label">Deskripsi</label>
+                            <textarea name="description"
+                                      class="form-control"
+                                      rows="3"
+                                      placeholder="Deskripsi kondisi aset">{{ old('description', $editData->description ?? '') }}</textarea>
                         </div>
-
                         <div class="form-group mb-3">
                             <label>Status</label>
-                            <select class="form-control">
-                                <option value="1" selected>Aktif</option>
-                                <option value="0">Nonaktif</option>
+                            <select name="is_active" class="form-control">
+                                <option value="1"
+                                    {{ old('is_active', $editData->is_active ?? 1) == 1 ? 'selected' : '' }}>
+                                    Aktif
+                                </option>
+                                <option value="0"
+                                    {{ old('is_active', $editData->is_active ?? 1) == 0 ? 'selected' : '' }}>
+                                    Nonaktif
+                                </option>
                             </select>
                         </div>
 
                     </div>
 
                     <div class="card-footer text-end">
-                        <button type="button" class="btn btn-primary">
-                            <i class="fas fa-save"></i> Simpan
+                        @if ($editData)
+                            <a href="{{ route('master.conditions.index') }}"
+                               class="btn btn-secondary me-2">
+                                Batal
+                            </a>
+                        @endif
+
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i>
+                            {{ $editData ? 'Update' : 'Simpan' }}
                         </button>
                     </div>
                 </form>
+
             </div>
         </div>
         <!-- END FORM -->

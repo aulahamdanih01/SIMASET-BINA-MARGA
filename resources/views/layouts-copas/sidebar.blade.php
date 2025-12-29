@@ -65,8 +65,8 @@
 
 
         <!-- DATA MASTER -->
-        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::routeIs('master.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('master.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-archive"></i>
             <p>
               Data Master
@@ -75,22 +75,22 @@
           </a>
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
+              <a href="{{ route('master.pic.index') }}" class="nav-link {{ Request::routeIs('master.pic.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i> Penanggung Jawab Aset
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
+              <a href="{{ route('master.categories.index') }}" class="nav-link {{ Request::routeIs('master.categories.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i> Kategori Aset
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+              <a href="{{ route('master.conditions.index') }}" class="nav-link {{ Request::routeIs('master.conditions.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i> Kondisi Aset
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
+              <a href="{{ route('master.units.index') }}" class="nav-link {{ Request::routeIs('master.units.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i> Satuan Barang
               </a>
             </li>
@@ -98,8 +98,8 @@
         </li>
 
         <!-- ASET TETAP -->
-        <li class="nav-item {{ Request::routeIs('documents.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('documents.*') ? 'active' : '' }}">
+        <li class="nav-item {{ Request::routeIs('fixed_assets.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('fixed_assets.*') ? 'active' : '' }}">
             <i class="nav-icon fas fa-briefcase"></i>
             <p>
               Aset tetap

@@ -19,27 +19,27 @@ Route::prefix('master')->name('master.')->group(function () {
     Route::prefix('kategori')->name('categories.')->group(function () {
         Route::get('/', [AssetCategoryController::class, 'index'])->name('index');
         Route::post('/', [AssetCategoryController::class, 'store'])->name('store');
-        Route::get('edit/{category}', [AssetCategoryController::class, 'edit'])->name('edit');
+        #Route::get('edit/{category}', [AssetCategoryController::class, 'edit'])->name('edit');
         Route::put('{category}', [AssetCategoryController::class, 'update'])->name('update');
         Route::get('detail/{category}', [AssetCategoryController::class, 'show'])->name('show');
     });
 
     // KONDISI ASET
-    Route::prefix('kondisi')->name('condition.')->group(function () {
+    Route::prefix('kondisi')->name('conditions.')->group(function () {
         Route::get('/', [AssetConditionController::class, 'index'])->name('index');
         Route::post('/', [AssetConditionController::class, 'store'])->name('store');
-        Route::get('edit/{condition}', [AssetConditionController::class, 'edit'])->name('edit');
+        #Route::get('edit/{condition}', [AssetConditionController::class, 'edit'])->name('edit');
         Route::put('{condition}', [AssetConditionController::class, 'update'])->name('update');
         Route::get('detail/{condition}', [AssetConditionController::class, 'show'])->name('show');
     });
 
     // SATUAN INVENTORY
-    Route::prefix('satuan')->name('unit.')->group(function () {
-        Route::get('/', [AssetInventoryUnitController::class, 'index'])->name('index');
-        Route::post('/', [AssetInventoryUnitController::class, 'store'])->name('store');
-        Route::get('edit/{unit}', [AssetInventoryUnitController::class, 'edit'])->name('edit');
-        Route::put('{unit}', [AssetInventoryUnitController::class, 'update'])->name('update');
-        Route::get('detail/{unit}', [AssetInventoryUnitController::class, 'show'])->name('show');
+    Route::prefix('satuan')->name('units.')->group(function () {
+        Route::get('/', [AssetInventoryUnitController::class,'index'])->name('index');
+        Route::post('/', [AssetInventoryUnitController::class,'store'])->name('store');
+        #Route::get('edit/{unit}', [AssetInventoryUnitController::class, 'edit'])->name('edit');
+        Route::put('{unit}', [AssetInventoryUnitController::class,'update'])->name('update');
+        Route::get('detail/{unit}', [AssetInventoryUnitController::class,'show'])->name('show');
     });
 
     // PIC / USER
