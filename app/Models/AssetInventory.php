@@ -30,7 +30,7 @@ class AssetInventory extends Model
     ];
 
     protected $casts = [
-        'stock'      => 'decimal:2',
+        'stock'      => 'integer',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];

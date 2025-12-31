@@ -35,7 +35,7 @@
                                         <td>
                                             @if ($user->last_active)
                                                 <span class="text-success">
-                                                    {{ $user->last_active->diffForHumans() }}
+                                                    {{ $user->last_active->format('d-m-Y H:i') }}
                                                 </span>
                                             @else
                                                 <span class="text-muted">-</span>

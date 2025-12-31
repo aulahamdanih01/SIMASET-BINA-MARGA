@@ -25,7 +25,7 @@ class InventoryStockIn extends Model
     ];
 
     protected $casts = [
-        'quantity'   => 'decimal:2',
+        'quantity'   => 'integer',
         'created_at' => 'datetime',
     ];
 

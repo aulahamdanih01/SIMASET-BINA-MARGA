@@ -1,11 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\AssetConditionController;
+use App\Http\Controllers\AssetInventoryController;
 use App\Http\Controllers\AssetInventoryUnitController;
-use App\Http\Controllers\UserController;
-use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
@@ -14,7 +16,6 @@ Route::get('/', function () {
 
 
 Route::prefix('master')->name('master.')->group(function () {
-
     // KATEGORI ASET
     Route::prefix('kategori')->name('categories.')->group(function () {
         Route::get('/', [AssetCategoryController::class, 'index'])->name('index');
@@ -51,6 +52,26 @@ Route::prefix('master')->name('master.')->group(function () {
         Route::get('{user}', [UserController::class, 'destroy'])->name('destroy');
     });
 
+});
+
+Route::prefix('inventori')->name('inventories.')->group(function () {
+    Route::get('/', [AssetInventoryController::class, 'index'])->name('index');
+    Route::get('create', [AssetInventoryController::class, 'create'])->name('create');
+    Route::post('/', [AssetInventoryController::class, 'store'])->name('store');
+    Route::put('{asset}', [AssetInventoryController::class, 'update'])->name('update');
+
+    Route::prefix('stok')->name('stocks.')->group(function () {
+
+        Route::prefix('/masuk')->name('in.')->group(function () {
+            Route::get('/', [StockController::class, 'index_in'])->name('In');
+            Route::post('/', [StockController::class, 'store'])->name('store');
+        });
+
+        Route::prefix('/keluar')->name('out.')->group(function () {
+            Route::get('/', [StockController::class, 'index_out'])->name('Out');
+            Route::post('/', [StockController::class, 'store'])->name('store');
+        });
+    });
 });
 
 Route::get('/dashboard', function () {

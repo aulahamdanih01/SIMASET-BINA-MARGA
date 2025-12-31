@@ -98,82 +98,41 @@
         </li>
 
         <!-- ASET TETAP -->
-        <li class="nav-item {{ Request::routeIs('fixed_assets.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('fixed_assets.*') ? 'active' : '' }}">
+        <li class="nav-item">
+          <a href="" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
             <i class="nav-icon fas fa-briefcase"></i>
-            <p>
-              Aset tetap
-              <i class="right fas fa-angle-left"></i>
-            </p>
+            <p>Aset Tetap</p>
           </a>
-          <ul class="nav nav-treeview">
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Daftar Aset Tetap
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.create') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Tambah Aset Tetap
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.category.*') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Riwayat Aset Tetap
-              </a>
-            </li>
-          </ul>
         </li>
 
-
         <!-- INVENTORY -->
-        <li class="nav-item {{ Request::routeIs('laporan.*') ? 'menu-open' : '' }}">
-          <a href="#" class="nav-link {{ Request::routeIs('laporan.*') ? 'active' : '' }}">
+        <li class="nav-item">
+          <a href="{{route('inventories.index')}}" class="nav-link {{ Request::routeIs('inventories.index') ? 'active' : '' }}">
             <i class="nav-icon fas fa-clipboard-list"></i>
+            <p>Inventory</p>
+          </a>
+        </li>
+
+        <!-- TRANSAKSI -->
+        <li class="nav-item {{ Request::routeIs('master.*') ? 'menu-open' : '' }}">
+          <a href="#" class="nav-link {{ Request::routeIs('master.*') ? 'active' : '' }}">
+            <i class="nav-icon fas fa-exchange-alt"></i>
             <p>
-              Inventory
+              Transaksi Inventori
               <i class="right fas fa-angle-left"></i>
             </p>
           </a>
-
           <ul class="nav nav-treeview">
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Daftar Inventory
+              <a href="{{ route('master.pic.index') }}" class="nav-link {{ Request::routeIs('master.pic.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Transaksi Masuk
               </a>
             </li>
             <li class="nav-item">
-              <a href="" class="nav-link {{ Request::routeIs('documents.index') ? 'active' : '' }}">
-                <i class="far fa-circle nav-icon"></i> Tambah Inventory
+              <a href="{{ route('master.categories.index') }}" class="nav-link {{ Request::routeIs('master.categories.index') ? 'active' : '' }}">
+                <i class="far fa-circle nav-icon"></i> Transaksi Keluar
               </a>
             </li>
-
-            <!-- LAPORAN INVENTORY -->
-            <li class="nav-item {{ Request::routeIs('laporan.inventory.*') ? 'menu-open' : '' }}">
-              <a href="#" class="nav-link {{ Request::routeIs('laporan.inventory.*') ? 'active' : '' }}">
-                <i></i>
-                <p>
-                  Transaksi Inventory
-                  <i class="right fas fa-angle-left"></i>
-                </p>
-              </a>
-
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i></i>
-                    <p>Inventory Masuk</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="" class="nav-link">
-                    <i></i>
-                    <p>Inventory Keluar</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-
           </ul>
         </li>
 
@@ -188,7 +147,6 @@
           </a>
 
           <ul class="nav nav-treeview">
-
             <!-- LAPORAN ASET -->
             <li class="nav-item {{ Request::routeIs('laporan.aset.*') ? 'menu-open' : '' }}">
               <a href="#" class="nav-link {{ Request::routeIs('laporan.aset.*') ? 'active' : '' }}">
@@ -233,7 +191,6 @@
                   <i class="right fas fa-angle-left"></i>
                 </p>
               </a>
-
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="" class="nav-link">
@@ -261,7 +218,7 @@
       <li class="nav-header" style="color: white;">OTHER</li>
       <li class="nav-item">
         <a href="{{ route('profile.edit') }}" class="nav-link {{ Request::routeIs('dashboard') ? 'active' : '' }}">
-          <i class="nav-icon fas fa-user"></i>
+          <i class="nav- fas fa-user"></i>
           <p>Profil</p>
         </a>
       </li>

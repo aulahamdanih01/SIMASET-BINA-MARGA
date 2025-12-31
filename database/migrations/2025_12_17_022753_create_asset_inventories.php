@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('code')->unique();
             $table->foreignId('asset_category_id')->constrained('asset_categories');
             $table->text('spesification')->nullable();
-            $table->decimal('stock', 15, 2)->default(0);
+            $table->integer('stock')->default(0);
             $table->foreignId('asset_inventory_units_id')->constrained('asset_inventory_units');
             $table->timestamp('created_at')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');

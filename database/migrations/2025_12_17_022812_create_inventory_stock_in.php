@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('inventory_stock_in', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('asset_inventory_id')->constrained('asset_inventory');
-            $table->decimal('quantity', 15, 2);
+            $table->integer('quantity');
             $table->string('usage_for')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->foreignId('created_by')->constrained('users');
