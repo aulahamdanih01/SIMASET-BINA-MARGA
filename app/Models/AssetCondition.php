@@ -11,11 +11,14 @@ class AssetCondition extends Model
 
     protected $table = 'asset_conditions';
 
-    protected $primaryKey = 'id';
-
+    /**
+     * Karena tidak menggunakan $table->timestamps()
+     */
     public $timestamps = false;
-    // created_at & updated_at dikelola manual
 
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'code',
         'name',
@@ -27,14 +30,21 @@ class AssetCondition extends Model
         'updated_by',
     ];
 
+    /**
+     * Attribute casting
+     */
     protected $casts = [
         'is_active'   => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
+    /* ==========================
+     | RELATIONSHIPS
+     |==========================*/
+
     /**
-     * User pembuat kondisi aset
+     * User who created this condition
      */
     public function creator()
     {
@@ -42,10 +52,30 @@ class AssetCondition extends Model
     }
 
     /**
-     * User pengubah kondisi aset
+     * User who last updated this condition
      */
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Fixed assets with this condition
+     */
+    public function fixedAssets()
+    {
+        return $this->hasMany(FixedAsset::class, 'asset_condition_id');
+    }
+
+    /* ==========================
+     | SCOPES
+     |==========================*/
+
+    /**
+     * Only active conditions
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }

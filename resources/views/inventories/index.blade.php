@@ -93,11 +93,11 @@
                                         {{-- ACTION --}}
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="#"
+                                                <a href="{{ route('inventories.stocks.in.create', $asset->id) }}"
                                                    class="btn btn-sm btn-outline-success">
                                                     <i class="bi bi-plus-circle"></i> Masuk
                                                 </a>
-                                                <a href="#"
+                                                <a href="{{ route('inventories.stocks.out.create', $asset->id) }}"
                                                    class="btn btn-sm btn-outline-danger"
                                                    {{ $asset->stock == 0 ? 'disabled' : '' }}>
                                                     <i class="bi bi-dash-circle"></i> Keluar

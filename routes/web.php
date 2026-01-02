@@ -63,12 +63,12 @@ Route::prefix('inventori')->name('inventories.')->group(function () {
     Route::prefix('stok')->name('stocks.')->group(function () {
 
         Route::prefix('/masuk')->name('in.')->group(function () {
-            Route::get('/', [StockController::class, 'index_in'])->name('In');
+            Route::get('/', [StockController::class, 'index_in'])->name('create');
             Route::post('/', [StockController::class, 'store'])->name('store');
         });
 
         Route::prefix('/keluar')->name('out.')->group(function () {
-            Route::get('/', [StockController::class, 'index_out'])->name('Out');
+            Route::get('/', [StockController::class, 'index_out'])->name('create');
             Route::post('/', [StockController::class, 'store'])->name('store');
         });
     });
@@ -83,5 +83,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
 
 require __DIR__.'/auth.php';

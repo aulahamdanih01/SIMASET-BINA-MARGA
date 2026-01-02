@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('asset_conditions', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('asset_inventory_units', function (Blueprint $table) {
+            $table->id();
             $table->string('code')->unique();
             $table->string('name');
-            $table->text('description')->nullable();
+            $table->string('symbol', 20);
             $table->boolean('is_active')->default(true);
             $table->timestamp('created_at')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users');
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asset_conditions');
+        Schema::dropIfExists('asset_inventory_units');
     }
 };

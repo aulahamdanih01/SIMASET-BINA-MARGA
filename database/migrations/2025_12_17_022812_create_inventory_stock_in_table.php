@@ -11,15 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('inventory_stock_out', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('asset_inventory_id')->constrained('asset_inventory');
+        Schema::create('inventory_stock_in', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('asset_inventory_id')->constrained('asset_inventories');
             $table->integer('quantity');
-            $table->text('source')->nullable();
+            $table->foreignId('usage_type_id')->constrained('usage_types');
+            $table->foreignId('fixed_asset_id')->nullable()->constrained('fixed_assets');
+            $table->text('description')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->foreignId('created_by')->constrained('users');
         });
-
     }
 
     /**
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('inventory_stock_out');
+        Schema::dropIfExists('inventory_stock_in');
     }
 };

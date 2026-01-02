@@ -5,32 +5,42 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InventoryStockIn extends Model
+class InventoryStockOut extends Model
 {
     use HasFactory;
 
-    protected $table = 'inventory_stock_in';
+    protected $table = 'inventory_stock_out';
 
-    protected $primaryKey = 'id';
-
+    /**
+     * Karena tidak menggunakan $table->timestamps()
+     */
     public $timestamps = false;
-    // hanya memakai created_at manual
 
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'asset_inventory_id',
         'quantity',
-        'usage_for',
+        'source',
         'created_at',
         'created_by',
     ];
 
+    /**
+     * Attribute casting
+     */
     protected $casts = [
         'quantity'   => 'integer',
         'created_at' => 'datetime',
     ];
 
+    /* ==========================
+     | RELATIONSHIPS
+     |==========================*/
+
     /**
-     * Relasi ke master inventory
+     * Inventory item
      */
     public function inventory()
     {
@@ -38,7 +48,7 @@ class InventoryStockIn extends Model
     }
 
     /**
-     * User yang mencatat stok masuk
+     * User who created this stock out
      */
     public function creator()
     {

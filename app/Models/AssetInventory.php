@@ -9,34 +9,44 @@ class AssetInventory extends Model
 {
     use HasFactory;
 
-    protected $table = 'asset_inventory';
+    protected $table = 'asset_inventories';
 
-    protected $primaryKey = 'id';
-
+    /**
+     * Karena tidak menggunakan $table->timestamps()
+     */
     public $timestamps = false;
-    // karena created_at & updated_at didefinisikan manual
 
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'name',
         'code',
         'asset_category_id',
-        'spesification',
+        'specification',
         'stock',
-        'asset_inventory_units_id',
+        'asset_inventory_unit_id',
         'created_at',
         'created_by',
         'updated_at',
         'updated_by',
     ];
 
+    /**
+     * Attribute casting
+     */
     protected $casts = [
-        'stock'      => 'integer',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'stock'       => 'integer',
+        'created_at'  => 'datetime',
+        'updated_at'  => 'datetime',
     ];
 
+    /* ==========================
+     | RELATIONSHIPS
+     |==========================*/
+
     /**
-     * Relasi ke kategori aset
+     * Category of inventory
      */
     public function category()
     {
@@ -44,15 +54,18 @@ class AssetInventory extends Model
     }
 
     /**
-     * Relasi ke satuan inventory
+     * Unit of inventory (pcs, box, etc)
      */
     public function unit()
     {
-        return $this->belongsTo(AssetInventoryUnit::class, 'asset_inventory_units_id');
+        return $this->belongsTo(
+            AssetInventoryUnit::class,
+            'asset_inventory_units_id'
+        );
     }
 
     /**
-     * User pembuat data inventory
+     * User who created this inventory
      */
     public function creator()
     {
@@ -60,10 +73,62 @@ class AssetInventory extends Model
     }
 
     /**
-     * User pengubah data inventory
+     * User who last updated this inventory
      */
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Stock in history
+     */
+    public function stockIns()
+    {
+        return $this->hasMany(InventoryStockIn::class, 'asset_inventory_id');
+    }
+
+    /**
+     * Stock out history
+     */
+    public function stockOuts()
+    {
+        return $this->hasMany(InventoryStockOut::class, 'asset_inventory_id');
+    }
+
+    /* ==========================
+     | SCOPES
+     |==========================*/
+
+    /**
+     * Inventory with available stock
+     */
+    public function scopeAvailable($query)
+    {
+        return $query->where('stock', '>', 0);
+    }
+
+    /* ==========================
+     | HELPERS
+     |==========================*/
+
+    /**
+     * Increase stock
+     */
+    public function increaseStock(int $qty): void
+    {
+        $this->increment('stock', $qty);
+    }
+
+    /**
+     * Decrease stock (safe)
+     */
+    public function decreaseStock(int $qty): void
+    {
+        if ($this->stock < $qty) {
+            throw new \Exception('Stok tidak mencukupi');
+        }
+
+        $this->decrement('stock', $qty);
     }
 }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
        Schema::create('asset_categories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->string('name');
             $table->enum('asset_type', ['fixed', 'inventory']);
             $table->boolean('is_active')->default(true);

@@ -9,13 +9,19 @@ class AssetCategory extends Model
 {
     use HasFactory;
 
+    /**
+     * Table name (opsional, tapi eksplisit)
+     */
     protected $table = 'asset_categories';
 
-    protected $primaryKey = 'id';
+    /**
+     * Timestamps manual (karena tidak pakai $table->timestamps())
+     */
+    public $timestamps = false;
 
-    public $timestamps = false; 
-    // karena timestamp dibuat manual (created_at & updated_at nullable)
-
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'name',
         'asset_type',
@@ -26,14 +32,21 @@ class AssetCategory extends Model
         'updated_by',
     ];
 
+    /**
+     * Attribute casting
+     */
     protected $casts = [
-        'is_active'   => 'boolean',
+        'is_active' => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
+    /* ==========================
+     | RELATIONSHIPS
+     |==========================*/
+
     /**
-     * User yang membuat kategori
+     * User who created the category
      */
     public function creator()
     {
@@ -41,10 +54,57 @@ class AssetCategory extends Model
     }
 
     /**
-     * User yang terakhir mengubah kategori
+     * User who last updated the category
      */
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Fixed assets under this category
+     */
+    public function fixedAssets()
+    {
+        return $this->hasMany(FixedAsset::class)
+            ->where('asset_type', 'fixed');
+    }
+
+    /**
+     * Inventory assets under this category
+     */
+    public function inventories()
+    {
+        return $this->hasMany(AssetInventory::class)
+            ->where('asset_type', 'inventory');
+    }
+
+    /* ==========================
+     | SCOPES
+     |==========================*/
+
+    /**
+     * Only active categories
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
+    }
+
+    /* ==========================
+     | HELPERS
+     |==========================*/
+
+    /**
+     * Check category type
+     */
+    public function isFixed(): bool
+    {
+        return $this->asset_type === 'fixed';
+    }
+
+    public function isInventory(): bool
+    {
+        return $this->asset_type === 'inventory';
     }
 }

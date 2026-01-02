@@ -11,17 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fixed_assets', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('name');
+       Schema::create('asset_conditions', function (Blueprint $table) {
+            $table->id();
             $table->string('code')->unique();
-            $table->foreignId('asset_category_id')->constrained('asset_categories');
-            $table->foreignId('person_in_charge')->constrained('users');
-            $table->foreignId('asset_condition_id')->constrained('asset_conditions');
-            $table->date('acquisition_date');
-            $table->text('specification')->nullable();
+            $table->string('name');
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamp('created_at')->nullable();
-            $table->foreignId('created_by')->constrained('users');
+            $table->foreignId('created_by')->nullable()->constrained('users');
             $table->timestamp('updated_at')->nullable();
             $table->foreignId('updated_by')->nullable()->constrained('users');
         });
@@ -32,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fixed_assets');
+        Schema::dropIfExists('asset_conditions');
     }
 };

@@ -6,7 +6,7 @@
 
         <!-- FORM STOK MASUK -->
         <div class="col-lg-12">
-            <div class="card card-primary shadow-sm">
+            <div class="card card-success shadow-sm">
                 <div class="card-header">
                     <h3 class="card-title">Tambah Stok Masuk</h3>
                 </div>
@@ -23,7 +23,7 @@
                                     class="form-control"
                                     required>
                                 <option value="" disabled selected>-- Pilih Inventory --</option>
-                                @foreach ($stockIns as $inventory)
+                                @foreach ($inventories as $inventory)
                                     <option value="{{ $inventory->id }}">
                                         {{ $inventory->name }} ({{ $inventory->code }})
                                     </option>
@@ -33,7 +33,7 @@
 
                         {{-- JUMLAH --}}
                         <div class="form-group mb-3">
-                            <label>Jumlah Masuk</label>
+                            <label>Jumlah</label>
                             <input type="number"
                                    name="quantity"
                                    min="1"
@@ -44,14 +44,14 @@
 
                         {{-- KEGUNAAN --}}
                         <div class="form-group mb-3">
-                            <label>Digunakan Untuk</label>
+                            <label>Sumber</label>
                             <textarea name="usage_for"
                                       class="form-control"
                                       rows="3"
                                       placeholder="Contoh: Penambahan stok gudang / pembelian supplier"></textarea>
                         </div>
 
-                        {{-- CREATED AT --}}
+                        {{-- TANGGAL --}}
                         <div class="form-group mb-3">
                             <label>Tanggal Masuk</label>
                             <input type="datetime-local"
@@ -61,7 +61,7 @@
                                    required>
                         </div>
 
-                        {{-- CREATED BY --}}
+                        {{-- USER --}}
                         <input type="hidden"
                                name="created_by"
                                value="{{ auth()->id() }}">

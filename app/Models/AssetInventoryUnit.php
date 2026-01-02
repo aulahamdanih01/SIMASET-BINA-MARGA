@@ -11,11 +11,14 @@ class AssetInventoryUnit extends Model
 
     protected $table = 'asset_inventory_units';
 
-    protected $primaryKey = 'id';
-
+    /**
+     * Karena tidak menggunakan $table->timestamps()
+     */
     public $timestamps = false;
-    // karena created_at & updated_at didefinisikan manual
 
+    /**
+     * Mass assignable attributes
+     */
     protected $fillable = [
         'code',
         'name',
@@ -27,14 +30,21 @@ class AssetInventoryUnit extends Model
         'updated_by',
     ];
 
+    /**
+     * Attribute casting
+     */
     protected $casts = [
         'is_active'   => 'boolean',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
 
+    /* ==========================
+     | RELATIONSHIPS
+     |==========================*/
+
     /**
-     * User pembuat satuan inventory
+     * User who created this unit
      */
     public function creator()
     {
@@ -42,10 +52,30 @@ class AssetInventoryUnit extends Model
     }
 
     /**
-     * User pengubah satuan inventory
+     * User who last updated this unit
      */
     public function updater()
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    /**
+     * Inventories that use this unit
+     */
+    public function inventories()
+    {
+        return $this->hasMany(AssetInventory::class, 'asset_inventory_unit_id');
+    }
+
+    /* ==========================
+     | SCOPES
+     |==========================*/
+
+    /**
+     * Only active units
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }

@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('asset_histories', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->id();
             $table->foreignId('fixed_asset_id')->constrained('fixed_assets');
             $table->enum('event_type', ['mutation', 'condition_change', 'maintenance']);
             $table->foreignId('old_user')->nullable()->constrained('users');
