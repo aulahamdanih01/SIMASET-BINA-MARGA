@@ -119,7 +119,7 @@
                                     <option value="admin">Admin</option>
                                 @endif
 
-                                <option value="operator">PIC</option>
+                                <option value="user">PIC</option>
                             </select>
                         </div>
 

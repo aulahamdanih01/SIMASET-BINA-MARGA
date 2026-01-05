@@ -60,7 +60,7 @@ class AssetInventory extends Model
     {
         return $this->belongsTo(
             AssetInventoryUnit::class,
-            'asset_inventory_units_id'
+            'asset_inventory_unit_id'
         );
     }
 

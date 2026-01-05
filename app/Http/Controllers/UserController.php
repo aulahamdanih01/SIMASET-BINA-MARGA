@@ -31,7 +31,7 @@ class UserController extends Controller
             'address'  => 'nullable|string',
             'phone'    => 'nullable|string|max:20',
             'email'    => 'required|email|unique:users,email',
-            'role'     => 'required|in:admin,operator',
+            'role'     => 'required|in:admin,user',
             'password' => 'required|string|min:6',
         ]);
 

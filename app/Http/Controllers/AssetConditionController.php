@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AssetCondition;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class AssetConditionController extends Controller
 {
@@ -12,9 +13,6 @@ class AssetConditionController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Index + Edit (dalam satu halaman)
-     */
     public function index(Request $request)
     {
         $conditions = AssetCondition::orderBy('name')->get();
@@ -36,14 +34,15 @@ class AssetConditionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'code'        => 'required|string|max:20|unique:asset_conditions,code',
             'name'        => 'required|string|max:100',
             'description' => 'nullable|string',
             'is_active'   => 'required|boolean',
         ]);
 
+        $code = $this->generateCodeFromName($request->name);
+
         AssetCondition::create([
-            'code'        => $request->code,
+            'code'        => $code,
             'name'        => $request->name,
             'description' => $request->description,
             'is_active'   => $request->is_active,
@@ -64,14 +63,18 @@ class AssetConditionController extends Controller
         $condition = AssetCondition::findOrFail($id);
 
         $request->validate([
-            'code'        => 'required|string|max:20|unique:asset_conditions,code,' . $condition->id,
             'name'        => 'required|string|max:100',
             'description' => 'nullable|string',
             'is_active'   => 'required|boolean',
         ]);
 
+        // regenerate code jika nama berubah
+        $code = $condition->name !== $request->name
+            ? $this->generateCodeFromName($request->name, $condition->id)
+            : $condition->code;
+
         $condition->update([
-            'code'        => $request->code,
+            'code'        => $code,
             'name'        => $request->name,
             'description' => $request->description,
             'is_active'   => $request->is_active,
@@ -82,5 +85,36 @@ class AssetConditionController extends Controller
         return redirect()
             ->route('master.conditions.index')
             ->with('success', 'Kondisi aset berhasil diperbarui');
+    }
+
+    /**
+     * Generate kode otomatis dari nama
+     * Contoh: "Rusak Berat" => RB
+     */
+    private function generateCodeFromName(string $name, $ignoreId = null): string
+    {
+        // Ambil huruf awal tiap kata
+        $words = explode(' ', trim($name));
+        $code = collect($words)
+            ->map(fn ($word) => Str::upper(Str::substr($word, 0, 1)))
+            ->implode('');
+
+        // Batasi panjang
+        $code = Str::limit($code, 5, '');
+
+        // Cek unique
+        $originalCode = $code;
+        $counter = 1;
+
+        while (
+            AssetCondition::where('code', $code)
+                ->when($ignoreId, fn ($q) => $q->where('id', '!=', $ignoreId))
+                ->exists()
+        ) {
+            $code = $originalCode . $counter;
+            $counter++;
+        }
+
+        return $code;
     }
 }

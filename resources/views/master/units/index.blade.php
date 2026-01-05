@@ -79,18 +79,6 @@
                     <div class="card-body">
 
                         <div class="form-group mb-3">
-                            <label>Kode</label>
-                            <input type="text"
-                                name="code"
-                                class="form-control @error('code') is-invalid @enderror"
-                                value="{{ old('code', $editData->code ?? '') }}"
-                                placeholder="Contoh: PCS">
-                            @error('code')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
-
-                        <div class="form-group mb-3">
                             <label>Nama Satuan</label>
                             <input type="text"
                                 name="name"

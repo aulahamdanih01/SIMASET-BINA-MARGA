@@ -26,16 +26,6 @@
                                 required>
                         </div>
 
-                        {{-- KODE BARANG --}}
-                        <div class="form-group mb-3">
-                            <label>Kode Barang</label>
-                            <input type="text"
-                                name="code"
-                                class="form-control"
-                                placeholder="INV-OLI-001"
-                                required>
-                        </div>
-
                         {{-- KATEGORI --}}
                         <div class="form-group mb-3">
                             <label>Kategori</label>
@@ -54,36 +44,22 @@
                         {{-- SATUAN --}}
                         <div class="form-group mb-3">
                             <label>Satuan</label>
-                            <select name="asset_inventory_units_id"
+                            <select name="asset_inventory_unit_id"
                                     class="form-control"
                                     required>
                                 <option value="" disabled selected>-- Pilih Satuan --</option>
                                 @foreach ($units as $unit)
                                     <option value="{{ $unit->id }}">
-                                        {{ $unit->name }}
+                                        {{ $unit->symbol }}
                                     </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        {{-- STOK AWAL --}}
-                        <div class="form-group mb-3">
-                            <label>Stok Awal</label>
-                            <input type="number"
-                                name="stock"
-                                min="0"
-                                class="form-control"
-                                placeholder="0"
-                                required>
-                            <small class="text-muted">
-                                Stok awal sebelum transaksi masuk / keluar
-                            </small>
-                        </div>
-
                         {{-- SPESIFIKASI --}}
                         <div class="form-group mb-3">
-                            <label>Spesifikasi</label>
-                            <textarea name="spesification"
+                            <label>Specifikasi</label>
+                            <textarea name="specification"
                                     class="form-control"
                                     rows="3"
                                     placeholder="Contoh: Kemasan 1 Liter, SAE 10W-40"></textarea>
