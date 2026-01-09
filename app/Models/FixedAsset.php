@@ -17,16 +17,15 @@ class FixedAsset extends Model
     // created_at & updated_at dikelola manual
 
     protected $fillable = [
-        'name',
         'code',
+        'photo',
+        'name',
         'asset_category_id',
         'person_in_charge',
         'asset_condition_id',
         'acquisition_date',
         'specification',
-        'created_at',
         'created_by',
-        'updated_at',
         'updated_by',
     ];
 

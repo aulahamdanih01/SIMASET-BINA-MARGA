@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\AssetInventory;
+use App\Models\FixedAsset;
 use App\Models\InventoryStockIn;
 use App\Models\InventoryStockOut;
+use App\Models\User;
+use App\Models\Unit;
 use Illuminate\Http\Request;
 
 class StockController extends Controller
@@ -24,7 +27,7 @@ class StockController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('inventories.stocks.in', compact(
+        return view('inventories.stocks.in.index', compact(
             'stockIns',
             'inventories'
         ));
@@ -45,9 +48,36 @@ class StockController extends Controller
             ->paginate(10)
             ->withQueryString();
 
-        return view('inventories.stocks.out', compact(
+        return view('inventories.stocks.out.index', compact(
             'stockOuts',
             'inventories'
         ));
+    }
+
+
+    public function create_in($id)
+    {
+        $selectedInventory = AssetInventory::findOrFail($id);
+
+        return view('inventories.stocks.in.create', [
+            'inventories' => AssetInventory::orderBy('name')->get(),
+            'selectedInventory' => $selectedInventory,
+        ]);
+    }
+
+
+        public function create_out($id)
+    {
+        $selectedInventory = AssetInventory::findOrFail($id);
+        $units = Unit::active()->orderBy('name')->get();
+        $fixedAssets       = FixedAsset::orderBy('name')->get();
+
+
+        return view('inventories.stocks.out.create', [
+            'inventories' => AssetInventory::orderBy('name')->get(),
+            'units' => $units,
+            'fixedAssets' => $fixedAssets,
+            'selectedInventory' => $selectedInventory,
+        ]);
     }
 }

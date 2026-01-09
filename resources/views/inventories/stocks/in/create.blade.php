@@ -19,17 +19,19 @@
                         {{-- INVENTORY --}}
                         <div class="form-group mb-3">
                             <label>Nama Inventory</label>
-                            <select name="asset_inventory_id"
-                                    class="form-control"
-                                    required>
-                                <option value="" disabled selected>-- Pilih Inventory --</option>
-                                @foreach ($inventories as $inventory)
-                                    <option value="{{ $inventory->id }}">
-                                        {{ $inventory->name }} ({{ $inventory->code }})
-                                    </option>
-                                @endforeach
-                            </select>
+
+                            {{-- TAMPILAN (READ-ONLY) --}}
+                            <input type="text"
+                                class="form-control"
+                                value="{{ $selectedInventory->name }} ({{ $selectedInventory->code }})"
+                                readonly>
+
+                            {{-- NILAI YANG DIKIRIM --}}
+                            <input type="hidden"
+                                name="asset_inventory_id"
+                                value="{{ $selectedInventory->id }}">
                         </div>
+
 
                         {{-- JUMLAH --}}
                         <div class="form-group mb-3">

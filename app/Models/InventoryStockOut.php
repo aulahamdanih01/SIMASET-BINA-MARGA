@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InventoryStockIn extends Model
+class InventoryStockOut extends Model
 {
     use HasFactory;
 
@@ -48,15 +48,7 @@ class InventoryStockIn extends Model
     {
         return $this->belongsTo(AssetInventory::class, 'asset_inventory_id');
     }
-
-    /**
-     * Usage type (DAILY / MAINTENANCE)
-     */
-    public function usageType()
-    {
-        return $this->belongsTo(UsageType::class, 'usage_type_id');
-    }
-
+    
     /**
      * Related fixed asset (nullable)
      */

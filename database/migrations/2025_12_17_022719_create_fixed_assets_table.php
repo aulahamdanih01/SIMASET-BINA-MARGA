@@ -13,15 +13,21 @@ return new class extends Migration
     {
         Schema::create('fixed_assets', function (Blueprint $table) {
             $table->id();
+
             $table->string('code')->unique();
+            $table->string('photo')->nullable(); // ✅ FOTO ASSET
             $table->string('name');
+
             $table->foreignId('asset_category_id')->constrained('asset_categories');
             $table->foreignId('person_in_charge')->constrained('users');
             $table->foreignId('asset_condition_id')->constrained('asset_conditions');
+
             $table->date('acquisition_date');
             $table->text('specification')->nullable();
+
             $table->timestamp('created_at')->nullable();
             $table->foreignId('created_by')->constrained('users');
+
             $table->timestamp('updated_at')->nullable();
             $table->foreignId('updated_by')->nullable()->constrained('users');
         });

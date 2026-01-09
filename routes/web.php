@@ -63,12 +63,14 @@ Route::prefix('inventori')->name('inventories.')->group(function () {
     Route::prefix('stok')->name('stocks.')->group(function () {
 
         Route::prefix('/masuk')->name('in.')->group(function () {
-            Route::get('/', [StockController::class, 'index_in'])->name('create');
+            Route::get('/', [StockController::class, 'index_in'])->name('index');
+            Route::get('/{inventory_id}', [StockController::class, 'create_in'])->name('create');
             Route::post('/', [StockController::class, 'store'])->name('store');
         });
 
         Route::prefix('/keluar')->name('out.')->group(function () {
-            Route::get('/', [StockController::class, 'index_out'])->name('create');
+            Route::get('/', [StockController::class, 'index_out'])->name('index');
+            Route::get('/{inventory_id}', [StockController::class, 'create_out'])->name('create');
             Route::post('/', [StockController::class, 'store'])->name('store');
         });
     });

@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('asset_inventories', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            
             $table->string('code')->unique();
+            $table->string('photo')->nullable(); // ✅ FOTO ASSET
+            $table->string('name');
             $table->foreignId('asset_category_id')->constrained('asset_categories');
             $table->text('specification')->nullable();
             $table->integer('stock')->default(0);

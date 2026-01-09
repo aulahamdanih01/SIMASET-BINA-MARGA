@@ -21,6 +21,7 @@ class AssetInventoryUnit extends Model
      */
     protected $fillable = [
         'code',
+        'photo',
         'name',
         'symbol',
         'is_active',

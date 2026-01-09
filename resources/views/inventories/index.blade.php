@@ -70,18 +70,18 @@
                             </thead>
 
                             <tbody>
-                                @forelse ($assets as $asset)
+                                @forelse ($inventories as $inventory)
                                     <tr>
-                                        <td class="text-center">{{ $asset->id }}</td>
-                                        <td>{{ $asset->code }}</td>
-                                        <td class="fw-semibold">{{ $asset->name }}</td>
-                                        <td>{{ $asset->category->name ?? '-' }}</td>
+                                        <td class="text-center">{{ $inventory->id }}</td>
+                                        <td>{{ $inventory->code }}</td>
+                                        <td class="fw-semibold">{{ $inventory->name }}</td>
+                                        <td>{{ $inventory->category->name ?? '-' }}</td>
 
                                         {{-- STOCK --}}
                                         <td class="text-center">
-                                            @if ($asset->stock > 0)
+                                            @if ($inventory->stock > 0)
                                                 <span class="badge bg-success px-3">
-                                                    {{ $asset->stock }} unit
+                                                    {{ $inventory->stock }} unit
                                                 </span>
                                             @else
                                                 <span class="badge bg-danger px-3">
@@ -93,14 +93,14 @@
                                         {{-- ACTION --}}
                                         <td class="text-center">
                                             <div class="btn-group">
-                                                <a href="{{ route('inventories.stocks.in.create', $asset->id) }}"
-                                                   class="btn btn-sm btn-outline-success">
-                                                    <i class="bi bi-plus-circle"></i> Masuk
+                                                <a href="{{ route('inventories.stocks.in.create', ['inventory_id' => $inventory->id]) }}"
+                                                    class="btn btn-sm btn-outline-success">
+                                                    <i class="bi bi-plus-circle"></i> Tambah Stok
                                                 </a>
-                                                <a href="{{ route('inventories.stocks.out.create', $asset->id) }}"
-                                                   class="btn btn-sm btn-outline-danger"
-                                                   {{ $asset->stock == 0 ? 'disabled' : '' }}>
-                                                    <i class="bi bi-dash-circle"></i> Keluar
+
+                                                <a href="{{ route('inventories.stocks.out.create', ['inventory_id' => $inventory->id]) }}"
+                                                   class="btn btn-sm btn-outline-danger">
+                                                    <i class="bi bi-dash-circle"></i> Kurangi Stok
                                                 </a>
                                                 <a href="#"
                                                    class="btn btn-sm btn-outline-secondary">

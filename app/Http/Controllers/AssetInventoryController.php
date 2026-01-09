@@ -15,7 +15,7 @@ class AssetInventoryController extends Controller
      */
     public function index(Request $request)
     {
-        $assets = AssetInventory::with(['category', 'unit'])
+        $inventories = AssetInventory::with(['category', 'unit'])
             ->when($request->search, function ($q) use ($request) {
                 $q->where('name', 'like', "%{$request->search}%")
                   ->orWhere('code', 'like', "%{$request->search}%");
@@ -28,7 +28,7 @@ class AssetInventoryController extends Controller
 
         $categories = AssetCategory::orderBy('name')->get();
 
-        return view('inventories.index', compact('assets', 'categories'));
+        return view('inventories.index', compact('inventories', 'categories'));
     }
 
     /**

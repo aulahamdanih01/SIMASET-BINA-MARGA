@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class InventoryStockOut extends Model
+class InventoryStockIn extends Model
 {
     use HasFactory;
 
-    protected $table = 'inventory_stock_out';
+    protected $table = 'inventory_stock_in';
 
     /**
      * Karena tidak menggunakan $table->timestamps()
